@@ -1,0 +1,46 @@
+<form class="form" [formGroup]="formGroup" >
+    <mat-form-field class="forms-field" *ngFor="let control of controls" class="example-full-width">
+        <input *ngIf="control.type !=='select'" 
+            matInput class="input" 
+            [type]="control.type" 
+            [formControlName]="control.name"
+            [placeholder]="control.placeholder">
+            
+        <mat-select  *ngIf="control.type ==='select' && control.options"  
+                 [formControlName]="control.name"
+                 [placeholder]="control.placeholder" >
+                <mat-option *ngFor="let option of control.options" 
+                    [value]="option" 
+                    [innerText]="option" 
+                   >
+                </mat-option>
+                 
+        </mat-select>  
+    </mat-form-field>
+     <label >נמענים:</label>
+    <button [ngStyle]="{'width':'5rem'}" 
+      (click)="addAddressee(i)">הוסף נמען</button> 
+  <div *ngFor="let control of addresseeList.controls; index as i">
+    <input [formControl]="control" />
+    <button [ngStyle]="{'width':'2rem'}" 
+            (click)="removeAddressee(i)">X</button>
+  </div>
+    <button mat-button color="primary" (click)="save()" [disabled]="formGroup.invalid " > 
+        שמור
+      </button>
+</form>
+<section class="credit">
+    <h3 [innerText]="'נמענים:' " ></h3>
+    <div *ngFor="let addressee of addressee$ | async" class="addressee" >
+        <span [innerText]="addressee?.Name "></span>
+    </div>
+<div [ngStyle]=" formGroup.value | getStyle ">
+   <h1 [innerText]="formGroup.value.title || 'שנה טובה'  " ></h1>
+   <div [innerText]="formGroup.value.text ||  'לשנה טובה תכתב ותחתם'" ></div>
+   <h3 [innerText]="'מאת' " ></h3>
+   <h3 [innerText]="(formGroup.value.firstName||' ישראל') +'  '+ (formGroup.value.lastName||' ישראלי') " ></h3>
+   <h3 [innerText]="formGroup.value.email || ''" ></h3>
+   <h3 [innerText]="formGroup.value.address || ''" ></h3>
+</div>
+
+</section>

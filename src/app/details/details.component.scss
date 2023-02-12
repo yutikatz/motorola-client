@@ -1,0 +1,27 @@
+:host {
+    .addressee{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    direction: rtl !important;
+    &>*{
+        direction: rtl !important;
+
+    }
+    justify-content: space-around;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-items: center;
+
+    .form {
+        display: inline-flex;
+        flex-direction: column;
+        width: 22vw;
+        border: 1px black dashed;
+
+    }
+
+}
